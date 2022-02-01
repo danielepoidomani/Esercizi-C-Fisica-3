@@ -146,7 +146,7 @@ $\tau_{Th}=1531$ min, la vita media del Torio 231.
 Consideriamo quindi un campione di 10g di Uranio, che equivale a $N_0=2.56\cdot 10^{22}$ atomi.
 \newline
 Usando MATLAB per graficare i modelli in un intervallo di tempo t = [0, 100$\cdot \tau_U$].
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{Activity U and Th.png}
 \end{figure}
@@ -155,4 +155,49 @@ Si osserva come l'andamento rispetti l'ipotesi di equilibrio per t>>$\tau_{Th}$ 
 \section{C.3.15
 \newline
 sezione d'urto Compton}
+Ipotizziamo un semplice modello in cui lo scattering Compton su un elettrone atomico avviene solo se il fotone trasferisce all'elettrone una energia superiore
+all'energia di ionizzazione I.
+Dalla conservazione dell'energia e dell'impulso si ottiene:
+\begin{equation}
+    \omega _0+m_e=\omega _1 +m_e+I
+\end{equation}
+\begin{equation}
+    \omega _0=\omega _1 cos\theta+(\sqrt{(m_e+I)^2-m_e^2})cos\psi
+\end{equation}
+\begin{equation}
+    0=\omega_1 sin\theta-(\sqrt{(m_e+I)^2-m_e^2})sin\psi
+\end{equation}
+Dalle ultime due si ricava quindi:
+\begin{equation}
+    \omega_0^2+\omega_1^2-2\omega_0\omega_1cos\theta=I^2+2m_eI
+\end{equation}
+E sostituendo $\omega_1$ ricavato dalla prima:
+\begin{equation}
+    \omega_0^2-\omega_0I-\frac{m_eI}{1-cos\theta}=0
+\end{equation}
+Risolvendo l'equazione di secondo grado e calcolandola al caso limite, ovvero quando $cos\theta=-1$, si ha che la frequenza e quindi l'energia di soglia del fotone incidente è:
+\begin{equation}
+    \omega_0>\sqrt{\frac{m_eI}{2}+\frac{I^2}{4}}+I/2
+\end{equation}
+Prendiamo ora la formula di Klein-Nishina (29) e la sua approssimazione per basse frequenze (30) per la sezione d'urto Compton differenziale:
+\begin{equation}
+    \frac{d\sigma}{d\Omega}=\frac{r_e^2}{2}(\frac{w_1}{w_0})^2(\frac{w_1}{w_0}+\frac{w_0}{w_1}-sin^2\theta)
+\end{equation}
+\begin{equation}
+    \frac{d\sigma}{d\Omega}\simeq\frac{r_e^2}{2}(1+cos^2\theta)
+\end{equation}
+Possiamo integrare la seconda per ottenere la sezione d'urto Compton a basse frequenze, stando attenti però agli estremi di integrazione, infatti avremo $-1<cos\theta<1-p$, dove abbiamo usato $p=\frac{m_eI}{\omega_0(\omega_0-I)}$ (nel caso di p=2 otteniamo di nuovo l'energia di soglia).
+\begin{equation}
+    \sigma_C=\int_{0}^{2\pi}\int_{-1}^{1-p}\frac{r_e^2}{2}(1+cos^2\theta)d\phi dcos\theta=\pi r_e^2(\frac{8}{3}-2p+p^2-\frac{p^3}{3})
+\end{equation}
+Si nota che per $p->0$, ovvero per $\omega>>\sqrt{m_eI}$ si ha che la sezione d'urto Compton tende a quella Thomson.
+\newline
+Per confrontare la formula di Klein-Nishina con l'approssimazione a basse frequenze, con MATLAB abbiamo integrato numericamente la prima e poi graficato entrambi gli andamenti in funzione della frequenza nel caso del Piombo:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{Cross Section Compton.png}
+\end{figure}
+La frequenza varia dall'energia di soglia fino a 10 GeV, dove sappiamo che la sezione d'urto Compton tende a zero, ovvero da circa $10^{18}$ a $10^{26}$ Hz.
+\newline
+Si vede che, almeno nel caso del piombo, la formula approssimata valga solo per frequenze prossime a quella di soglia e che assume praticamente sempre il valore della sezione d'urto Thomson.
 \end{document}
